@@ -159,6 +159,7 @@ const AgentController = async (req, res, next, initializeClient, addTitle) => {
       }
     });
 
+    const token = req.headers.authorization.split(' ')[1];
     const messageOptions = {
       user: userId,
       onStart,
@@ -170,6 +171,7 @@ const AgentController = async (req, res, next, initializeClient, addTitle) => {
       progressOptions: {
         res,
       },
+      instructions: `\n If needed, my user token is: ${token} \n`,
     };
 
     let response = await client.sendMessage(text, messageOptions);
@@ -228,7 +230,7 @@ const AgentController = async (req, res, next, initializeClient, addTitle) => {
     // Save user message if needed
     if (!client.skipSaveUserMessage) {
       await saveMessage(req, userMessage, {
-        context: 'api/server/controllers/agents/request.js - don\'t skip saving user message',
+        context: "api/server/controllers/agents/request.js - don't skip saving user message",
       });
     }
 
