@@ -1,7 +1,7 @@
 # v0.7.8
 
 # Base node image
-FROM node:20-alpine AS node
+FROM node:24.22.1-alpine AS node
 
 # Install jemalloc
 RUN apk add --no-cache jemalloc
